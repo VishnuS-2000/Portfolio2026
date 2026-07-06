@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vishnu Satish — Full-Stack Developer</title>
+<meta name="description" content="Vishnu Satish — full-stack developer engineering enterprise HCM & payroll systems. Java, Spring Boot, Oracle, Angular. Kochi, India." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0A1A22;
+    --ink-2:#0E242E;
+    --ink-3:#123240;
+    --line:rgba(233,241,242,.10);
+    --line-2:rgba(233,241,242,.16);
+    --fg:#EAF1F2;
+    --fg-dim:#93A9B2;
+    --fg-faint:#63808B;
+    --gold:#E6AE4A;
+    --gold-2:#F2C36B;
+    --gold-soft:rgba(230,174,74,.12);
+    --teal:#57C4A8;
+    --f-display:'Space Grotesk',system-ui,sans-serif;
+    --f-body:'IBM Plex Sans',system-ui,sans-serif;
+    --f-mono:'IBM Plex Mono',ui-monospace,monospace;
+    --maxw:1080px;
+    --pad:clamp(20px,5vw,48px);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    background:var(--ink);
+    color:var(--fg);
+    font-family:var(--f-body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  /* subtle blueprint grid backdrop */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:56px 56px;
+    -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 0%,transparent 70%);
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 0%,transparent 70%);
+    opacity:.5;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad);position:relative;z-index:1}
+  .mono{font-family:var(--f-mono)}
+
+  /* ---------- NAV ---------- */
+  header.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
+    background:rgba(10,26,34,.72);border-bottom:1px solid transparent;transition:border-color .3s}
+  header.nav.scrolled{border-color:var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-family:var(--f-mono);font-weight:600;font-size:15px;letter-spacing:.02em;display:flex;align-items:center;gap:10px}
+  .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold)}
+  .nav-links{display:flex;align-items:center;gap:30px}
+  .nav-links a{font-size:14px;color:var(--fg-dim);transition:color .2s;position:relative}
+  .nav-links a:hover{color:var(--fg)}
+  .nav-cta{font-family:var(--f-mono);font-size:13px;color:var(--ink)!important;background:var(--gold);
+    padding:9px 16px;border-radius:8px;font-weight:600;transition:transform .2s,box-shadow .2s}
+  .nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(230,174,74,.28)}
+  .menu-btn{display:none;background:none;border:1px solid var(--line-2);border-radius:8px;
+    width:40px;height:40px;color:var(--fg);cursor:pointer;font-size:18px}
+  .mobile-menu{display:none;flex-direction:column;gap:4px;padding:12px var(--pad) 20px;border-bottom:1px solid var(--line);background:var(--ink-2)}
+  .mobile-menu a{padding:12px 4px;font-size:16px;color:var(--fg-dim);border-bottom:1px solid var(--line)}
+  .mobile-menu a:last-child{border-bottom:none}
+  @media(max-width:760px){
+    .nav-links{display:none}
+    .menu-btn{display:flex;align-items:center;justify-content:center}
+    .mobile-menu.open{display:flex}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{padding:clamp(56px,10vw,110px) 0 clamp(40px,7vw,72px)}
+  .eyebrow{font-family:var(--f-mono);font-size:13px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--gold);display:inline-flex;align-items:center;gap:10px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--gold);display:inline-block}
+  .hero h1{font-family:var(--f-display);font-weight:600;line-height:1.04;letter-spacing:-.02em;
+    font-size:clamp(38px,7.2vw,74px);margin:22px 0 0;max-width:16ch}
+  .hero h1 .hl{color:var(--gold);font-style:normal}
+  .hero .lede{font-size:clamp(16px,2.2vw,19px);color:var(--fg-dim);max-width:56ch;margin-top:24px;line-height:1.7}
+  .hero .lede b{color:var(--fg);font-weight:500}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+  .btn{font-family:var(--f-mono);font-size:14px;font-weight:600;padding:13px 22px;border-radius:10px;
+    display:inline-flex;align-items:center;gap:9px;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s,border-color .2s}
+  .btn-primary{background:var(--gold);color:var(--ink);border:1px solid var(--gold)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(230,174,74,.26)}
+  .btn-ghost{background:transparent;color:var(--fg);border:1px solid var(--line-2)}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+
+  /* run-log signature panel */
+  .runlog{margin-top:46px;background:linear-gradient(180deg,var(--ink-2),var(--ink));
+    border:1px solid var(--line-2);border-radius:14px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.35);max-width:640px}
+  .runlog-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.02)}
+  .runlog-bar i{width:11px;height:11px;border-radius:50%;background:#26414c;display:inline-block}
+  .runlog-bar i:nth-child(1){background:#3a4d55}
+  .runlog-bar span{margin-left:8px;font-family:var(--f-mono);font-size:12px;color:var(--fg-faint)}
+  .runlog-body{padding:18px 20px;font-family:var(--f-mono);font-size:clamp(12px,2.4vw,13.5px);line-height:2}
+  .runlog-body .ln{white-space:nowrap;overflow:hidden;color:var(--fg-dim)}
+  .runlog-body .ok{color:var(--teal)}
+  .runlog-body .cmd{color:var(--fg)}
+  .runlog-body .cmd::before{content:"$ ";color:var(--gold)}
+  .runlog-body .big{color:var(--fg);font-size:1.15em}
+  .runlog-body .old{color:var(--fg-faint);text-decoration:line-through}
+  .runlog-body .new{color:var(--gold-2);font-weight:600}
+  .runlog-body .pct{color:var(--teal);font-weight:600}
+  .cursor{display:inline-block;width:8px;height:1.05em;background:var(--gold);vertical-align:-2px;animation:blink 1.1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+
+  /* ---------- METRICS ---------- */
+  .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+    border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:12px}
+  .metric{background:var(--ink);padding:26px 22px}
+  .metric .num{font-family:var(--f-display);font-weight:600;font-size:clamp(30px,4.6vw,44px);line-height:1;letter-spacing:-.02em;color:var(--fg)}
+  .metric .num .u{color:var(--gold);font-size:.62em;margin-left:2px}
+  .metric .lbl{font-family:var(--f-mono);font-size:12px;color:var(--fg-dim);margin-top:12px;line-height:1.5}
+  @media(max-width:760px){.metrics{grid-template-columns:repeat(2,1fr)}}
+
+  /* ---------- SECTION SHELL ---------- */
+  .section{padding:clamp(64px,9vw,104px) 0}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:44px}
+  .sec-idx{font-family:var(--f-mono);font-size:13px;color:var(--gold)}
+  .sec-title{font-family:var(--f-display);font-weight:600;font-size:clamp(24px,3.6vw,34px);letter-spacing:-.01em}
+  .sec-sub{color:var(--fg-dim);max-width:60ch;margin-top:-30px;margin-bottom:44px;font-size:16px}
+
+  /* ---------- ABOUT ---------- */
+  .about{font-size:clamp(17px,2.3vw,21px);line-height:1.75;max-width:64ch;color:var(--fg)}
+  .about b{color:var(--gold);font-weight:600}
+  .about .dim{color:var(--fg-dim)}
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{position:relative;margin-left:6px}
+  .tl-item{position:relative;padding:0 0 40px 34px;border-left:1px solid var(--line-2)}
+  .tl-item:last-child{border-left-color:transparent;padding-bottom:0}
+  .tl-item::before{content:"";position:absolute;left:-6px;top:5px;width:11px;height:11px;border-radius:50%;
+    background:var(--ink);border:2px solid var(--fg-faint)}
+  .tl-item.gold::before{border-color:var(--gold);background:var(--gold);box-shadow:0 0 14px var(--gold-soft)}
+  .tl-top{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px}
+  .tl-role{font-family:var(--f-display);font-weight:600;font-size:19px}
+  .tl-date{font-family:var(--f-mono);font-size:13px;color:var(--gold)}
+  .tl-org{color:var(--fg-dim);font-size:15px;margin-top:3px}
+  .tl-org .tag{font-family:var(--f-mono);font-size:11px;color:var(--gold);border:1px solid var(--line-2);
+    padding:2px 8px;border-radius:20px;margin-left:10px;vertical-align:1px}
+  .tl-list{list-style:none;margin-top:16px;display:grid;gap:11px}
+  .tl-list li{position:relative;padding-left:20px;color:var(--fg-dim);font-size:15.5px;line-height:1.6}
+  .tl-list li::before{content:"▹";position:absolute;left:0;color:var(--gold);font-size:13px;top:2px}
+  .tl-list li b{color:var(--fg);font-weight:600}
+
+  /* ---------- WORK CARDS ---------- */
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  @media(max-width:720px){.cards{grid-template-columns:1fr}}
+  .card{background:var(--ink-2);border:1px solid var(--line);border-radius:14px;padding:26px 24px;
+    transition:transform .25s,border-color .25s,background .25s;position:relative;overflow:hidden}
+  .card:hover{transform:translateY(-4px);border-color:var(--line-2);background:var(--ink-3)}
+  .card .k{font-family:var(--f-mono);font-size:12px;color:var(--gold);letter-spacing:.05em}
+  .card h3{font-family:var(--f-display);font-weight:600;font-size:20px;margin:12px 0 8px}
+  .card p{color:var(--fg-dim);font-size:15px;line-height:1.65}
+  .card .stack{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+  .chip{font-family:var(--f-mono);font-size:11.5px;color:var(--fg-dim);border:1px solid var(--line-2);
+    padding:4px 10px;border-radius:7px;background:rgba(255,255,255,.02)}
+
+  /* ---------- SKILLS ---------- */
+  .skills{display:grid;grid-template-columns:repeat(2,1fr);gap:26px 40px}
+  @media(max-width:720px){.skills{grid-template-columns:1fr}}
+  .skill-grp .sh{font-family:var(--f-mono);font-size:13px;color:var(--gold);margin-bottom:14px;
+    padding-bottom:10px;border-bottom:1px solid var(--line);letter-spacing:.05em}
+  .skill-grp .tags{display:flex;flex-wrap:wrap;gap:9px}
+  .skill-grp .tags span{font-size:14px;color:var(--fg);background:var(--ink-2);border:1px solid var(--line);
+    padding:7px 13px;border-radius:9px;transition:border-color .2s,color .2s}
+  .skill-grp .tags span:hover{border-color:var(--gold);color:var(--gold)}
+
+  /* ---------- AWARDS ---------- */
+  .awards-band{background:linear-gradient(120deg,var(--ink-2),var(--ink-3));border:1px solid var(--line-2);
+    border-radius:18px;padding:clamp(28px,5vw,44px);display:flex;flex-wrap:wrap;align-items:center;gap:28px;justify-content:space-between}
+  .aw-left{display:flex;align-items:center;gap:22px;min-width:min(100%,320px)}
+  .aw-medal{width:64px;height:64px;flex:none;border-radius:50%;display:grid;place-items:center;
+    background:radial-gradient(circle at 35% 30%,var(--gold-2),var(--gold));color:var(--ink);
+    font-family:var(--f-display);font-weight:700;font-size:22px;box-shadow:0 0 30px var(--gold-soft)}
+  .aw-left h3{font-family:var(--f-display);font-weight:600;font-size:clamp(20px,2.6vw,26px);line-height:1.2}
+  .aw-left p{color:var(--fg-dim);font-size:14px;margin-top:6px;font-family:var(--f-mono)}
+  .aw-quarters{display:flex;gap:10px;flex-wrap:wrap}
+  .aw-q{font-family:var(--f-mono);font-size:13px;color:var(--gold);border:1px solid var(--gold);
+    border-radius:9px;padding:9px 15px;background:var(--gold-soft)}
+
+  /* ---------- CONTACT ---------- */
+  .contact{text-align:center;padding-bottom:40px}
+  .contact .eyebrow{justify-content:center}
+  .contact .eyebrow::before{display:none}
+  .contact h2{font-family:var(--f-display);font-weight:600;font-size:clamp(30px,5.4vw,52px);
+    letter-spacing:-.02em;margin:18px 0 10px}
+  .contact p{color:var(--fg-dim);max-width:48ch;margin:0 auto 30px}
+  .contact-links{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+  .clink{font-family:var(--f-mono);font-size:14px;padding:12px 20px;border:1px solid var(--line-2);
+    border-radius:10px;color:var(--fg-dim);transition:all .2s;display:inline-flex;align-items:center;gap:9px}
+  .clink:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+  .clink.primary{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:600}
+  .clink.primary:hover{box-shadow:0 10px 26px rgba(230,174,74,.26);color:var(--ink)}
+
+  footer{border-top:1px solid var(--line);padding:26px 0;margin-top:40px}
+  .foot-inner{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
+    font-family:var(--f-mono);font-size:12.5px;color:var(--fg-faint)}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.cursor{animation:none}}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand"><span class="dot"></span>VISHNU&nbsp;SATISH</a>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#work">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+      <a href="VishnuS_Resume.pdf" class="nav-cta" download>Download CV</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#work">Work</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+    <a href="VishnuS_Resume.pdf" download>↓ Download CV</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero wrap">
+    <span class="eyebrow reveal">Full-Stack Developer · Payroll & HCM Systems</span>
+    <h1 class="reveal">I make enterprise payroll run in <span class="hl">minutes</span>, not hours.</h1>
+    <p class="lede reveal">I'm a full-stack developer at <b>CTeBS, Kochi</b>, building <b>Trendz&nbsp;People</b> — an enterprise HCM &amp; payroll platform that pays <b>35,000+ employees</b> across the Gulf and Jordan. I work the whole stack, from Oracle up to Angular.</p>
+    <div class="hero-cta reveal">
+      <a href="VishnuS_Resume.pdf" class="btn btn-primary" download>↓ Download CV</a>
+      <a href="#experience" class="btn btn-ghost">View experience</a>
+    </div>
+
+    <div class="runlog reveal" id="runlog" aria-hidden="true">
+      <div class="runlog-bar"><i></i><i></i><i></i><span>trendz-payroll — run log</span></div>
+      <div class="runlog-body" id="runlogBody"></div>
+    </div>
+  </section>
+
+  <!-- METRICS -->
+  <section class="wrap" style="padding-bottom:12px">
+    <div class="metrics reveal">
+      <div class="metric"><div class="num" data-count="35000" data-suffix="+">0</div><div class="lbl">employees paid<br/>each payroll cycle</div></div>
+      <div class="metric"><div class="num" data-count="95" data-suffix="%">0</div><div class="lbl">faster payroll run<br/>(≈7h → &lt;10 min)</div></div>
+      <div class="metric"><div class="num" data-count="3" data-suffix="×">0</div><div class="lbl">Extra Mile<br/>Excellence Awards</div></div>
+      <div class="metric"><div class="num" data-count="3" data-suffix=" yrs">0</div><div class="lbl">shipping production<br/>enterprise software</div></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section wrap" id="about">
+    <div class="sec-head reveal"><span class="sec-idx">01</span><h2 class="sec-title">About</h2></div>
+    <p class="about reveal">Promoted to <b>Specialist</b> in under three years, I focus on the systems that pay tens of thousands of people correctly and on time. <span class="dim">I like the hard, unglamorous parts — making a payroll run 95% faster, catching data anomalies before they reach a payslip, and shipping a module end to end from Oracle stored procedures up to an Angular screen. I started on the core ERP suite — designing a shared UI component library and implementing finance modules — before moving into HCM and payroll, so I've seen an enterprise platform from the ledger to the login screen. In late 2025 I flew to Jordan to take one of those systems live on-site for an international client.</span></p>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section wrap" id="experience">
+    <div class="sec-head reveal"><span class="sec-idx">02</span><h2 class="sec-title">Experience</h2></div>
+    <div class="timeline">
+      <div class="tl-item gold reveal">
+        <div class="tl-top">
+          <div>
+            <div class="tl-role">Specialist / Graduate Specialist, Product Development</div>
+            <div class="tl-org">Classic Technologies &amp; Business Solutions (CTeBS), Kochi<span class="tag">Promoted Jan 2026</span></div>
+          </div>
+          <div class="tl-date">Jun 2023 — Present</div>
+        </div>
+        <ul class="tl-list">
+          <li><b>Revamped the payroll engine end to end</b>, cutting a 35,000-employee run from ≈7 hours to under 10 minutes — a &gt;95% reduction — with AI-assisted development.</li>
+          <li><b>Deployed on-site at Classic Fashion Apparel Industry Ltd. Co., Jordan</b> (Nov 2025 – Mar 2026), leading the implementation and go-live of the Trendz People payroll module.</li>
+          <li><b>Built anomaly-verification routines</b> that catch anomalies in HR data corrections before they propagate into payroll.</li>
+          <li><b>Delivered full-stack modules</b> — Angular front-end, Spring Boot REST APIs, Oracle backend — including the Air Ticket &amp; Travel Request module with eligibility engines and bulk upload.</li>
+          <li><b>Engineered core Oracle PL/SQL packages</b> across HCM, Payroll, Leave and Attendance; built enterprise reporting with JasperReports.</li>
+          <li><b>Earlier, on the core ERP suite:</b> designed a shared UI component library adopted across modules, and designed &amp; implemented finance modules end to end — before moving to the Trendz People HCM &amp; payroll product.</li>
+        </ul>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-top">
+          <div>
+            <div class="tl-role">Full-Stack Developer Intern</div>
+            <div class="tl-org">Lascade &nbsp;·&nbsp; FLEG (E-Journal, CUSAT ICREP)</div>
+          </div>
+          <div class="tl-date">2022 — 2023</div>
+        </div>
+        <ul class="tl-list">
+          <li>Built Shopify apps and an academic E-Journal platform with <b>Next.js, React, Node.js, TailwindCSS and PostgreSQL</b>.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section class="section wrap" id="work">
+    <div class="sec-head reveal"><span class="sec-idx">03</span><h2 class="sec-title">Selected Work</h2></div>
+    <div class="cards">
+      <div class="card reveal">
+        <div class="k">// performance engineering</div>
+        <h3>Payroll Engine Rebuild</h3>
+        <p>Re-architected a monthly payroll run for 35,000 employees using parallel compute and caching, collapsing an ≈7-hour job to under 10 minutes.</p>
+        <div class="stack"><span class="chip">Java 21</span><span class="chip">Virtual Threads</span><span class="chip">Redis</span><span class="chip">Oracle</span></div>
+      </div>
+      <div class="card reveal">
+        <div class="k">// erp · design system</div>
+        <h3>ERP UI Component Library</h3>
+        <p>Designed and built a reusable UI component library adopted across the ERP suite — standardizing forms, data grids and interactions so teams ship modules faster and stay visually consistent.</p>
+        <div class="stack"><span class="chip">Angular</span><span class="chip">TypeScript</span><span class="chip">SCSS</span><span class="chip">Design System</span></div>
+      </div>
+      <div class="card reveal">
+        <div class="k">// erp · finance</div>
+        <h3>ERP Finance Modules</h3>
+        <p>Designed and implemented finance modules for the ERP platform end to end, delivering core accounting and transaction workflows from the SQL Server backend up to the UI.</p>
+        <div class="stack"><span class="chip">Angular</span><span class="chip">Spring Boot</span><span class="chip">T-SQL</span><span class="chip">SQL Server</span></div>
+      </div>
+      <div class="card reveal">
+        <div class="k">// full-stack modules</div>
+        <h3>Air Ticket, Travel &amp; Visa Modules</h3>
+        <p>A suite of employee-request modules built end to end — air ticket, travel request and visa — with eligibility engines, purchase-order generation and bulk upload, from the Angular UI to the Oracle backend.</p>
+        <div class="stack"><span class="chip">Angular</span><span class="chip">Spring Boot</span><span class="chip">PL/SQL</span></div>
+      </div>
+      <div class="card reveal">
+        <div class="k">// cross-platform mobile</div>
+        <h3>Trendz People &amp; Warehouse Apps</h3>
+        <p>Built cross-platform mobile apps in Flutter — an employee-facing Trendz People app and a Trendz Warehouse app for warehouse management — running on the same enterprise backend.</p>
+        <div class="stack"><span class="chip">Flutter</span><span class="chip">Dart</span><span class="chip">REST APIs</span></div>
+      </div>
+      <div class="card reveal">
+        <div class="k">// data integrity</div>
+        <h3>Anomaly Verification</h3>
+        <p>Automated checks that flag anomalies in HR data corrections before payroll finalization, cutting manual review and preventing payslip errors.</p>
+        <div class="stack"><span class="chip">PL/SQL</span><span class="chip">Rules Engine</span></div>
+      </div>
+      <div class="card reveal">
+        <div class="k">// side project</div>
+        <h3>BOTZ — Chatbot Builder</h3>
+        <p>A web interface for building and integrating chatbots, with an ML-backed intent layer.</p>
+        <div class="stack"><span class="chip">Next.js</span><span class="chip">TailwindCSS</span><span class="chip">Python</span><span class="chip">TensorFlow</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section wrap" id="skills">
+    <div class="sec-head reveal"><span class="sec-idx">04</span><h2 class="sec-title">Toolkit</h2></div>
+    <div class="skills">
+      <div class="skill-grp reveal">
+        <div class="sh">languages</div>
+        <div class="tags"><span>Java</span><span>TypeScript</span><span>JavaScript</span><span>PL/SQL</span><span>Python</span><span>SQL</span><span>C / C++</span></div>
+      </div>
+      <div class="skill-grp reveal">
+        <div class="sh">backend &amp; data</div>
+        <div class="tags"><span>Spring Boot</span><span>Node.js</span><span>REST APIs</span><span>Oracle</span><span>SQL Server</span><span>PostgreSQL</span><span>MongoDB</span><span>Redis</span></div>
+      </div>
+      <div class="skill-grp reveal">
+        <div class="sh">frontend &amp; mobile</div>
+        <div class="tags"><span>Angular</span><span>React</span><span>Next.js</span><span>Flutter</span><span>TailwindCSS</span><span>HTML / CSS</span></div>
+      </div>
+      <div class="skill-grp reveal">
+        <div class="sh">concepts &amp; tools</div>
+        <div class="tags"><span>Concurrency</span><span>Design Systems</span><span>Data Structures &amp; Algorithms</span><span>JasperReports</span><span>Git</span><span>AI-assisted dev</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AWARDS -->
+  <section class="section wrap">
+    <div class="awards-band reveal">
+      <div class="aw-left">
+        <div class="aw-medal">★</div>
+        <div>
+          <h3>Extra Mile Excellence Award</h3>
+          <p>CTeBS · awarded three times</p>
+        </div>
+      </div>
+      <div class="aw-quarters">
+        <span class="aw-q">Q1 2025</span>
+        <span class="aw-q">Q3 2025</span>
+        <span class="aw-q">Q1 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section wrap contact" id="contact">
+    <span class="eyebrow reveal">Open to opportunities</span>
+    <h2 class="reveal">Let's build something.</h2>
+    <p class="reveal">I'm exploring full-stack roles where scale and craft both matter. The fastest way to reach me is email.</p>
+    <div class="contact-links reveal">
+      <a class="clink primary" href="mailto:vishnusatish2000@gmail.com">✉ vishnusatish2000@gmail.com</a>
+      <a class="clink" href="https://github.com/VishnuS-2000" target="_blank" rel="noopener">↗ GitHub</a>
+      <a class="clink" href="https://www.linkedin.com/in/vishnu-satish-350554222" target="_blank" rel="noopener">↗ LinkedIn</a>
+      <a class="clink" href="VishnuS_Resume.pdf" download>↓ Résumé (PDF)</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-inner">
+    <span>© <span id="yr"></span> Vishnu Satish</span>
+    <span>Kochi, Kerala · India</span>
+    <span>Designed &amp; built from scratch</span>
+  </div>
+</footer>
+
+<script>
+  // year
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // nav shadow on scroll
+  const nav = document.getElementById('nav');
+  addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 8), {passive:true});
+
+  // mobile menu
+  const mb = document.getElementById('menuBtn'), mm = document.getElementById('mobileMenu');
+  mb.addEventListener('click', () => {
+    const open = mm.classList.toggle('open');
+    mb.textContent = open ? '✕' : '☰';
+  });
+  mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mm.classList.remove('open'); mb.textContent = '☰';
+  }));
+
+  // reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // count-up
+  const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  function countUp(el){
+    const target = +el.dataset.count, suffix = el.dataset.suffix || '';
+    if (reduce){ el.textContent = target.toLocaleString() + suffix; return; }
+    const dur = 1500, t0 = performance.now();
+    function step(t){
+      const p = Math.min((t - t0)/dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = Math.round(target * eased);
+      el.innerHTML = val.toLocaleString() + '<span class="u">' + suffix + '</span>';
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  const mio = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting){ countUp(e.target); mio.unobserve(e.target); } });
+  }, {threshold:.6});
+  document.querySelectorAll('.num[data-count]').forEach(el => mio.observe(el));
+
+  // run-log typing
+  const lines = [
+    {c:'cmd', t:'trendz payroll run --employees 35000'},
+    {c:'ok',  t:'[ ok ]  loaded 35,000 employee records'},
+    {c:'ok',  t:'[ ok ]  parallel compute · Java 21 virtual threads · Redis'},
+    {c:'ok',  t:'[ ok ]  validated · anomaly checks passed'},
+    {c:'res', t:'runtime  <span class="old">~07h 00m</span> &rarr; <span class="new">&lt; 10 min</span>  <span class="pct">-95%</span>'},
+  ];
+  const body = document.getElementById('runlogBody');
+  function renderStatic(){
+    body.innerHTML = lines.map(l => {
+      if (l.c==='cmd') return '<div class="ln cmd">'+l.t+'</div>';
+      if (l.c==='res') return '<div class="ln big">'+l.t+'</div>';
+      return '<div class="ln ok">'+l.t+'</div>';
+    }).join('');
+  }
+  function typeLog(){
+    body.innerHTML=''; let i=0;
+    function nextLine(){
+      if (i>=lines.length) return;
+      const l = lines[i], div = document.createElement('div');
+      div.className = 'ln ' + (l.c==='cmd'?'cmd':l.c==='res'?'big':'ok');
+      body.appendChild(div);
+      if (l.c==='res'){ div.innerHTML = l.t; i++; setTimeout(nextLine, 500); return; }
+      const cur = document.createElement('span'); cur.className='cursor';
+      let j=0; const txt=l.t;
+      (function type(){
+        div.textContent = txt.slice(0,j);
+        div.appendChild(cur);
+        if (j<txt.length){ j++; setTimeout(type, 16); }
+        else { cur.remove(); i++; setTimeout(nextLine, 260); }
+      })();
+    }
+    nextLine();
+  }
+  if (reduce) renderStatic();
+  else {
+    const rio = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting){ typeLog(); rio.unobserve(e.target); } });
+    }, {threshold:.4});
+    rio.observe(document.getElementById('runlog'));
+  }
+</script>
+</body>
+</html>
